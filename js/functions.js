@@ -84,9 +84,6 @@ const clear = () => {
   $data.forEach((e) => {
     e.classList.remove("data__input--error");
     e.classList.remove("data__input--succes");
-  // Reset additional fields
-  Array.from($data)[getIndex($data, "Company")].value = "";  // Add this
-  Array.from($data)[getIndex($data, "Title")].value = "";    // Add this
   })
   Array.from($options)[getIndex($options, "dotStyle")].value = "square"
   Array.from($options)[getIndex($options, "dotColor")].value = "#182c2b"
