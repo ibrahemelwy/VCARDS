@@ -103,8 +103,8 @@ body{
   flex-wrap: wrap;
   gap: 5px 10px;
 }
-.data__input{
-  flex-basis: calc(50% - 5px);
+.data__input {
+  flex-basis: 100%; /* Make each input take the full width */
   padding: 5px;
   border: none;
   border-bottom: 2px solid var(--textColor);
