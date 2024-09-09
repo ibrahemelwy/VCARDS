@@ -101,6 +101,12 @@ const clear = () => {
   messageError(false);
 }
 const vcardTemplate = () => {
+  const name = Array.from($data)[getIndex($data, "Name")];
+  const lastName = Array.from($data)[getIndex($data, "LastName")];
+  const phone = Array.from($data)[getIndex($data, "Phone")];
+  const email = Array.from($data)[getIndex($data, "Email")];
+  const company = Array.from($data)[getIndex($data, "Company")]; // Company field
+  const title = Array.from($data)[getIndex($data, "Title")];     // Title field
   return `BEGIN:VCARD
 VERSION:3.0
 N:${Array.from($data)[getIndex($data, "LastName")].value};${Array.from($data)[getIndex($data, "Name")].value}
