@@ -14,7 +14,9 @@ const $data = document.querySelectorAll(".data__input"),
     input_name: null,
     input_lastName: null,
     input_phone: null,
-    input_email: null
+    input_email: null,
+    input_company: null,  // Add this line
+    input_title: null     // Add this line
   }
 let qrCode = "";
 
@@ -62,6 +64,10 @@ const checkData = (element) => {
     inputError.input_phone = checkElement(regexPhone, element)
   else if (element.getAttribute("name") === "Email")
     inputError.input_email = checkElement(regexMail, element)
+  else if (element.getAttribute("name") === "Company")  // Add this block
+    inputError.input_company = element.value !== "" ? true : null;
+  else if (element.getAttribute("name") === "Title")    // Add this block
+     inputError.input_title = element.value !== "" ? true : null;
   checkError();
   if (!Object.values(inputError).includes(false) && Array.from($data)[getIndex($data, "Name")].value && Array.from($data)[getIndex($data, "Phone")].value)
     enableItem($buttonGenerateQr)
@@ -76,8 +82,11 @@ const clear = () => {
   $qrContainer.innerHTML = "";
   $data.forEach((e) => e.value = "")
   $data.forEach((e) => {
-    e.classList.remove("data__input--error")
-    e.classList.remove("data__input--succes")
+    e.classList.remove("data__input--error");
+    e.classList.remove("data__input--succes");
+  // Reset additional fields
+  Array.from($data)[getIndex($data, "Company")].value = "";  // Add this
+  Array.from($data)[getIndex($data, "Title")].value = "";    // Add this
   })
   Array.from($options)[getIndex($options, "dotStyle")].value = "square"
   Array.from($options)[getIndex($options, "dotColor")].value = "#182c2b"
@@ -99,6 +108,8 @@ const vcardTemplate = () => {
 VERSION:3.0
 N:${Array.from($data)[getIndex($data, "LastName")].value};${Array.from($data)[getIndex($data, "Name")].value}
 FN:${Array.from($data)[getIndex($data, "Name")].value} ${Array.from($data)[getIndex($data, "LastName")].value}
+ORG:${Array.from($data)[getIndex($data, "Company")].value}  // Add this line for Company
+TITLE:${Array.from($data)[getIndex($data, "Title")].value}  // Add this line for Title
 TEL;CELL:${Array.from($data)[getIndex($data, "Phone")].value}
 EMAIL:${Array.from($data)[getIndex($data, "Email")].value}
 END:VCARD`
